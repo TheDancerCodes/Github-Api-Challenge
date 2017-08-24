@@ -13,6 +13,6 @@ import retrofit2.http.GET;
 
 public interface GithubClient {
 
-    @GET("users?q=location:lagos+language:java")
+    @GET("/users?q=location:lagos+language:java")
     Call<List<GithubUsers>> listOfJavaDevs(String devs);
 }
