@@ -1,5 +1,10 @@
 package com.nabwera.github_api_challenge.api.service;
 
+import com.nabwera.github_api_challenge.api.model.GithubUsers;
+
+import java.util.List;
+
+import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
