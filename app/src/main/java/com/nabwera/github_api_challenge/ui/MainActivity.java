@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.nabwera.github_api_challenge.R;
 import com.nabwera.github_api_challenge.api.model.GithubUsers;
 import com.nabwera.github_api_challenge.api.service.GithubClient;
+import com.nabwera.github_api_challenge.ui.adapter.GithubUsersAdapter;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Listview to the display the Github users
-        listView = (ListView) findViewById(R.id.list_item_users_text);
+        listView = (ListView) findViewById(R.id.paginator_list);
 
         // Build Retrofit Objects
         Retrofit.Builder builder = new Retrofit.Builder()
