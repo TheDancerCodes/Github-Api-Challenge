@@ -1,18 +1,18 @@
 package com.nabwera.github_api_challenge.api.service;
 
-import com.nabwera.github_api_challenge.api.model.GithubUsers;
-
-import java.util.List;
+import com.nabwera.github_api_challenge.api.model.GithubUsersResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * Created by nabwera on 24/08/2017.
  */
 
+// Interface containing the Endpoint to query the API.
 public interface GithubClient {
 
-    @GET("/users?q=location:lagos+language:java")
-    Call<List<GithubUsers>> listOfJavaDevs(String devs);
+    @GET("/users")
+    Call<GithubUsersResponse> listOfJavaDevs(@Query("q") String devs_params);
 }
