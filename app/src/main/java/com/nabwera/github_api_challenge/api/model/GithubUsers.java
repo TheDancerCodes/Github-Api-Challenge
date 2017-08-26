@@ -26,7 +26,7 @@ public class GithubUsers {
     @SerializedName("avatar_url")
     @Expose
     private String avatarUrl;
-    @SerializedName("url")
+    @SerializedName("html_url")
     @Expose
     private String url;
 
