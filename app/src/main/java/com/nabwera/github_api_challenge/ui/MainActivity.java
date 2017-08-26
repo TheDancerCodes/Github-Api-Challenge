@@ -111,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        //Loading User Data
+        loadJSON();
     }
 
     // Handling Loading of JSON Data
