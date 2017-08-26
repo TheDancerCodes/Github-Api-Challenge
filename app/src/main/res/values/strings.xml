@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Github-Api-Challenge</string>
     <string name="action_settings">Settings</string>
+    <string name="user_details">User Details</string>
+    <string name="username">Username:</string>
+    <string name="profile_url">Profile Url:</string>
 </resources>

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.nabwera.github_api_challenge.R;
 import com.nabwera.github_api_challenge.api.model.GithubUsers;
+import com.nabwera.github_api_challenge.ui.ProfileActivity;
 
 
 import java.util.List;
@@ -69,23 +70,23 @@ public class GithubUsersAdapter extends RecyclerView.Adapter<GithubUsersAdapter.
             profile_photo = (ImageView) view.findViewById(R.id.profile_photo);
 
             // Handle an onClick listener on every card in the grid layout of the RecyclerView.
-//            view.setOnClickListener(new View.OnClickListener(){
-//                @Override
-//                public void onClick(View v){
-//                    int pos = getAdapterPosition();
-//                    if (pos != RecyclerView.NO_POSITION){
-//                        GithubUsers clickedDataItem = gitUsersList.get(pos);
-//                        Intent intent = new Intent(mContext, ProfileActivity.class);
-//                        intent.putExtra("username", gitUsersList.get(pos).getLogin());
-//                        intent.putExtra("profile_photo", gitUsersList.get(pos).getAvatarUrl());
-//                        intent.putExtra("profileURL", gitUsersList.get(pos).getUrl());
-//                        intent.putExtra("id", gitUsersList.get(pos).getId());
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        mContext.startActivity(intent);
-//                        Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getLogin(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION){
+                        GithubUsers clickedDataItem = gitUsersList.get(pos);
+                        Intent intent = new Intent(mContext, ProfileActivity.class);
+                        intent.putExtra("username", gitUsersList.get(pos).getLogin());
+                        intent.putExtra("profile_photo", gitUsersList.get(pos).getAvatarUrl());
+                        intent.putExtra("profileURL", gitUsersList.get(pos).getUrl());
+                        intent.putExtra("id", gitUsersList.get(pos).getId());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
+                        Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getLogin(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
 
     }
