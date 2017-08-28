@@ -8,12 +8,16 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.nabwera.github_api_challenge.R;
+import com.nabwera.github_api_challenge.api.model.GithubUsers;
+import com.nabwera.github_api_challenge.util.ShareUtil;
 
 /**
  * Created by nabwera on 26/08/2017.
@@ -40,6 +44,15 @@ public class ProfileActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.profile_photo_header);
         userName = (TextView) findViewById(R.id.userName);
         profileURL = (TextView) findViewById(R.id.profileURLink);
+
+        // Button that shares the users' profile when clicked
+        Button shareButton = (Button) findViewById(R.id.share_button);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareGithubUserProfile();
+            }
+        });
 
         // Test whether Intent received from a particular Activity has the required data.
         Intent intentThatStartedThisActivity = getIntent();
@@ -89,6 +102,15 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // Method that connects to ShareUtil and enables sharing of data to other apps
+    public void  shareGithubUserProfile(){
+        GithubUsers user = getIntent().getParcelableExtra("user");
+
+        String message = "Check out this awesome developer @" + user.getLogin() + ", " + user.getUrl();
+        ShareUtil.shareCustomUtil(message, this);
+
     }
 
 }

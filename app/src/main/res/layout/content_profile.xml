@@ -64,7 +64,36 @@
                     android:textSize="20sp"
                     android:autoLink="web"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/releasedate" />
+                    app:layout_constraintTop_toBottomOf="@+id/releasedate"
+                    android:layout_marginStart="@dimen/layout_margin_left" />
+
+                <Button
+                    android:id="@+id/share_button"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share"
+                    android:textColor="@android:color/white"
+                    android:theme="@style/shareButton"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:elevation="8dp"
+                    android:layout_marginLeft="@dimen/layout_margin_left"
+                    android:padding="@dimen/padding_layout"
+                    android:layout_marginTop="@dimen/layout_margin_top"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profileURLink"
+                    android:layout_marginStart="@dimen/layout_margin_left" />
+
+                <!--<Button-->
+                    <!--android:id="@+id/share_button"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="60dp"-->
+                    <!--android:text="@string/share"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--android:theme="@style/shareButton"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:elevation="8dp"/>-->
 
                 <!--<TextView-->
                     <!--android:id="@+id/thumbnailUrl"-->

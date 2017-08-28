@@ -81,6 +81,7 @@ public class GithubUsersAdapter extends RecyclerView.Adapter<GithubUsersAdapter.
                         intent.putExtra("profile_photo", gitUsersList.get(pos).getAvatarUrl());
                         intent.putExtra("profileURL", gitUsersList.get(pos).getUrl());
                         intent.putExtra("id", gitUsersList.get(pos).getId());
+                        intent.putExtra("user", clickedDataItem);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(intent);
                         Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getLogin(), Toast.LENGTH_SHORT).show();

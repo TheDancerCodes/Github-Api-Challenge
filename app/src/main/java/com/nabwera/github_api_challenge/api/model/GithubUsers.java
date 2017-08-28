@@ -1,5 +1,8 @@
 package com.nabwera.github_api_challenge.api.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,15 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by nabwera on 24/08/2017.
  */
 
-public class GithubUsers {
-
-//    private String login;
-//    private String profile_photo;
-//    private String profile_url;
-
-//    public String getName() {
-//        return login;
-//    }
+public class GithubUsers implements Parcelable {
 
     @SerializedName("login")
     @Expose
@@ -29,6 +24,21 @@ public class GithubUsers {
     @SerializedName("html_url")
     @Expose
     private String url;
+
+    public GithubUsers(String login, int id, String avatarUrl, String url){
+        this.login = login;
+        this.id = id;
+        this.avatarUrl = avatarUrl;
+        this.url = url;
+    }
+
+    public GithubUsers(Parcel in){
+        login = in.readString();
+        id = in.readInt();
+        avatarUrl = in.readString();
+        url = in.readString();
+    }
+
 
 
     public String getLogin() {
@@ -70,5 +80,30 @@ public class GithubUsers {
         this.url = url;
     }
 
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int i) {
+        dest.writeString(login);
+        dest.writeInt(id);
+        dest.writeString(url);
+        dest.writeString(avatarUrl);
+    }
+
+    public static final Parcelable.Creator<GithubUsers> CREATOR = new Parcelable.Creator<GithubUsers>() {
+        @Override
+        public GithubUsers createFromParcel(Parcel in) {
+            return new GithubUsers(in);
+        }
+
+        @Override
+        public GithubUsers[] newArray(int size) {
+            return new GithubUsers[size];
+        }
+    };
 
 }
