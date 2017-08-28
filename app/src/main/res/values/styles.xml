@@ -14,10 +14,19 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--Share Button Theme-->
     <style name="shareButton" parent="Widget.AppCompat.Button.Colored">
         <item name="colorControlHighlight">@color/colorPrimaryDark</item>
         <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
 
+    <!--Card View Theme-->
+    <style name="Widget.CardContent" parent="android:Widget">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
 </resources>

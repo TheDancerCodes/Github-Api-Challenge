@@ -19,70 +19,67 @@
             android:layout_height="match_parent"
             tools:showIn="@layout/activity_profile">
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
+            <!--<android.support.constraint.ConstraintLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/card_margin">
+
+                <LinearLayout
+                    style="@style/Widget.CardContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
 
                 <TextView
                     android:id="@+id/userName"
                     android:layout_width="368dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_margin_left"
                     android:padding="@dimen/padding_layout"
                     android:layout_marginTop="@dimen/layout_margin_top"
                     android:textSize="20sp"
-                    android:text="@string/username"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="16dp"
-                    tools:layout_constraintTop_creator="1"
-                    tools:layout_constraintLeft_creator="1" />
+                    android:text="@string/username" />
 
-                <TextView
-                    android:id="@+id/releasedate"
-                    android:layout_width="6dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_margin_left"
-                    android:padding="@dimen/padding_layout"
-                    android:layout_marginTop="@dimen/layout_margin_top"
-                    android:textSize="20sp"
-                    android:text="@string/profile_url"
-                    android:textColor="@color/colorAccent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/username"
-                    android:layout_marginStart="16dp"
-                    tools:layout_constraintTop_creator="1" />
+                <!--<TextView-->
+                    <!--android:id="@+id/releasedate"-->
+                    <!--android:layout_width="6dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/layout_margin_left"-->
+                    <!--android:padding="@dimen/padding_layout"-->
+                    <!--android:layout_marginTop="@dimen/layout_margin_top"-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:text="@string/profile_url"-->
+                    <!--android:textColor="@color/colorAccent"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/username"-->
+                    <!--android:layout_marginStart="16dp"-->
+                    <!--tools:layout_constraintTop_creator="1" />-->
 
                 <TextView
                     android:id="@+id/profileURLink"
                     android:layout_width="368dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_margin_left"
                     android:padding="@dimen/padding_layout"
                     android:layout_marginTop="@dimen/layout_margin_top"
                     android:textSize="20sp"
-                    android:autoLink="web"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/releasedate"
-                    android:layout_marginStart="@dimen/layout_margin_left" />
+                    android:autoLink="web" />
 
                 <Button
                     android:id="@+id/share_button"
-                    android:layout_width="368dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/share"
                     android:textColor="@android:color/white"
                     android:theme="@style/shareButton"
                     android:gravity="center"
                     android:textSize="16sp"
-                    android:elevation="8dp"
-                    android:layout_marginLeft="@dimen/layout_margin_left"
-                    android:padding="@dimen/padding_layout"
-                    android:layout_marginTop="@dimen/layout_margin_top"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/profileURLink"
-                    android:layout_marginStart="@dimen/layout_margin_left" />
+                    android:elevation="8dp" />
+
+
 
                 <!--<Button-->
                     <!--android:id="@+id/share_button"-->
@@ -103,7 +100,11 @@
                     <!--app:layout_constraintTop_toBottomOf="@+id/plotsynopsis"-->
                     <!--app:layout_constraintLeft_toLeftOf="parent" />-->
 
-            </android.support.constraint.ConstraintLayout>
+                </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            <!--</android.support.constraint.ConstraintLayout>-->
 
         </ScrollView>
 
