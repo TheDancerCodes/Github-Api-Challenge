@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -58,25 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Users Refreshed", Toast.LENGTH_SHORT).show();
             }
         });
-
-//        // Listview to the display the Github users
-//        listView = (ListView) findViewById(R.id.paginator_list);
-//
-//        // Build Retrofit Objects
-//        final Retrofit.Builder builder = new Retrofit.Builder()
-//                .baseUrl("https://api.github.com/search/")
-//                .addConverterFactory(GsonConverterFactory.create());
-//
-//        Retrofit retrofit = builder.build();
-//
-//        // Simple REST adapter which points the GitHub API endpoint.
-//        GithubClient client = retrofit.create(GithubClient.class);
-//
-//        // Fetch a list of the Github User.
-//        Call<List<GithubUsers>> call = client.listOfJavaDevs("language:java location:lagos");
-//
-//        // Execute the call asynchronously. Get a positive or negative callback.
-//        call.enqueue();
     }
 
     public Activity getActivity() {
@@ -114,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Loading User Data
         loadJSON();
+
     }
 
     // Handling Loading of JSON Data
@@ -148,7 +134,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
                 Log.d("Error", t.getMessage());
-                Toast.makeText(MainActivity.this, "Error Fetching User Data :(", Toast.LENGTH_SHORT).show();
+
+                // Code to check for network connectivity
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setCancelable(false);
+                builder.setTitle("No Internet");
+                builder.setMessage("Internet is required. Please Retry.");
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+
+                builder.setPositiveButton("Retry", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                        loadJSON();
+                    }
+                });
+                AlertDialog dialog = builder.create(); // calling builder.create after adding buttons
+                dialog.show();
+                Snackbar.make(findViewById(android.R.id.content), "Network Unavailable!", Snackbar.LENGTH_LONG)
+                        .setActionTextColor(Color.RED)
+                        .show();
+
             }
         });
     }catch(Exception e){
