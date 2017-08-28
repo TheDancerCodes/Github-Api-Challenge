@@ -27,6 +27,8 @@ public class ProfileActivity extends AppCompatActivity {
     TextView userName, profileURL;
     ImageView imageView;
 
+    String gitUserName;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void initCollapsingToolbar(){
         final CollapsingToolbarLayout collapsingToolbarLayout =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle(" ");
+        collapsingToolbarLayout.setTitle("Java User: ");
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
 
@@ -88,16 +90,24 @@ public class ProfileActivity extends AppCompatActivity {
             boolean isShow = false;
             int scrollRange = -1;
 
+
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset){
+
+                // Adding the Github Username on the CollapsingBar Layout
+                GithubUsers user = getIntent().getParcelableExtra("user");
+                if (user != null){
+                    gitUserName = user.getLogin();
+                }
+
                 if (scrollRange == -1){
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0){
-                    collapsingToolbarLayout.setTitle(getString(R.string.user_details));
+                    collapsingToolbarLayout.setTitle("Java User: " + gitUserName);
                     isShow = true;
                 } else if (isShow){
-                    collapsingToolbarLayout.setTitle(" ");
+                    collapsingToolbarLayout.setTitle("Java User: ");
                     isShow = false;
                 }
             }
