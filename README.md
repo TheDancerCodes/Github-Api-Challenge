@@ -33,5 +33,6 @@ Build an Android app to retrieve a list of Java Developers in Lagos using the Gi
   
   * Implement Constraint Layout.
   * [FIX] Saving and Restoring Activity State Correctly.
+  * Implement Pagination.
   * Reference dependencies in root gradle file.
   * Write Tests.
