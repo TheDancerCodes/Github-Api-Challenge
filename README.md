@@ -20,16 +20,15 @@ Build an Android app to retrieve a list of Java Developers in Lagos using the Gi
   
   
   ### Screenshots
-  ![Grid View](app/src/main/res/drawable/ScreenShot1.png?raw=true "ScreenShot1")
-  ![Detail View](app/src/main/res/drawable/ScreenShot2.png?raw=true "ScreenShot2")
-  ![Detail View](app/src/main/res/drawable/ScreenShot3.png?raw=true "ScreenShot3")
+
+  ![Grid View](app/src/main/res/drawable/ScreenShot1.png?raw=true "ScreenShot1") ![Detail View](app/src/main/res/drawable/ScreenShot2.png?raw=true "ScreenShot2") ![Detail View](app/src/main/res/drawable/ScreenShot3.png?raw=true "ScreenShot3")
 
   
   ### Releases
   
   Download the APK from [Releases](https://github.com/TheDancerCodes/Github-Api-Challenge/releases/)
   
-  ###TODOs
+  ### TODOs
   Here are the next things that I plan on working on:
   
   * Implement Constraint Layout.
