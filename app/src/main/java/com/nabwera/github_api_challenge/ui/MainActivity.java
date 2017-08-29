@@ -7,6 +7,8 @@ import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -37,8 +39,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    private ListView listView;
+    private final String KEY_RECYCLER_STATE = "recycler_state";
     private RecyclerView recyclerView;
+    private static Bundle mBundleRecyclerViewState;
     private GithubUsersAdapter adapter;
     private List<GithubUsers> usersList;
     ProgressDialog progessDialog;
@@ -51,7 +54,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initViews();
+        mBundleRecyclerViewState = savedInstanceState;
+
+        if (mBundleRecyclerViewState != null && mBundleRecyclerViewState.containsKey(KEY_RECYCLER_STATE)){
+
+            restorePreviousState(); // Restore data found in the Bundle
+
+        } else {
+            // No saved data, get data from remote
+            initViews();
+        }
+
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_content);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_dark);
@@ -171,6 +184,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        // save RecyclerView state
+//        mBundleRecyclerViewState = new Bundle();
+//        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
+//        mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
+//    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        mBundleRecyclerViewState = new Bundle();
+        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
+        super.onSaveInstanceState(outState);
+    }
+
+    public void restorePreviousState(){
+        // restore RecyclerView state
+        if (mBundleRecyclerViewState != null){
+            Parcelable listState = mBundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
+            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
+        }
+    }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        // restore RecyclerView state
+//        if (mBundleRecyclerViewState != null){
+//            Parcelable listState = mBundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
+//            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
