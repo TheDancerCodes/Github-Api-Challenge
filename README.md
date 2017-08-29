@@ -2,6 +2,10 @@
 
 This folder contains the source code for an Android App to retrieve a list of Developers using the [Github API](https://developer.github.com/v3/search/#search-users)
 
+ ### Releases
+  
+Download the APK from [Releases](https://github.com/TheDancerCodes/Github-Api-Challenge/releases/)
+  
 ### Challenge
 
 This challenge is to give us an idea of your programming experience on the Android platform.
@@ -23,10 +27,6 @@ Build an Android app to retrieve a list of Java Developers in Lagos using the Gi
 
   ![Grid View](app/src/main/res/drawable/ScreenShot1.png?raw=true "ScreenShot1") ![Detail View](app/src/main/res/drawable/ScreenShot2.png?raw=true "ScreenShot2") ![Detail View](app/src/main/res/drawable/ScreenShot3.png?raw=true "ScreenShot3")
 
-  
-  ### Releases
-  
-  Download the APK from [Releases](https://github.com/TheDancerCodes/Github-Api-Challenge/releases/)
   
   ### TODOs
   Here are the next things that I plan on working on:
