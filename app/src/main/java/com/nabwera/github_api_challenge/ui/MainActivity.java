@@ -1,27 +1,23 @@
 package com.nabwera.github_api_challenge.ui;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Parcelable;
-import android.os.PersistableBundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.ListView;
 import android.widget.Toast;
 
+import com.nabwera.github_api_challenge.GitHubApplication;
 import com.nabwera.github_api_challenge.R;
 import com.nabwera.github_api_challenge.api.model.GithubUsers;
 import com.nabwera.github_api_challenge.api.model.GithubUsersResponse;
@@ -35,15 +31,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
     private final String KEY_RECYCLER_STATE = "recycler_state";
     private RecyclerView recyclerView;
-    private static Bundle mBundleRecyclerViewState;
     private GithubUsersAdapter adapter;
-    private List<GithubUsers> usersList;
+    private List<GithubUsers> usersList = new ArrayList<>();
     ProgressDialog progessDialog;
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -54,17 +48,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mBundleRecyclerViewState = savedInstanceState;
+        initViews();
 
-        if (mBundleRecyclerViewState != null && mBundleRecyclerViewState.containsKey(KEY_RECYCLER_STATE)){
-
-            restorePreviousState(); // Restore data found in the Bundle
-
+        if (savedInstanceState != null && savedInstanceState.containsKey(KEY_RECYCLER_STATE)) {
+            restorePreviousState(savedInstanceState); // Restore data found in the Bundle
         } else {
-            // No saved data, get data from remote
-            initViews();
+            //Loading User Data
+            fetchGithubUsers();
         }
 
+    }
+
+    private void initViews() {
+        progessDialog = new ProgressDialog(this);
+        progessDialog.setMessage("Fetting Github Users...");
+        progessDialog.setCancelable(false);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        adapter = new GithubUsersAdapter(this, usersList);
+
+        // Setting up the Orientation
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        }
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.main_content);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_orange_dark);
@@ -75,56 +87,14 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Users Refreshed", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
-    public Activity getActivity() {
-        Context context = this;
-        while (context instanceof ContextWrapper) {
-            if (context instanceof Activity) {
-                return (Activity) context;
-            }
-            context = ((ContextWrapper) context).getBaseContext();
-        }
-        return null;
-    }
-
-    private void initViews() {
-        progessDialog = new ProgressDialog(this);
-        progessDialog.setMessage("Fetting Github Users...");
-        progessDialog.setCancelable(false);
-        progessDialog.show();
-
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-        usersList = new ArrayList<>();
-        adapter = new GithubUsersAdapter(this, usersList);
-
-        // Setting up the Orientation
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        }
-
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        //Loading User Data
-        loadJSON();
 
     }
 
     // Handling Loading of JSON Data
-    private void loadJSON() {
-        try{
-
-        // Build Retrofit Objects
-        final Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/search/")
-                .addConverterFactory(GsonConverterFactory.create());
-
-        Retrofit retrofit = builder.build();
+    private void fetchGithubUsers() {
+        progessDialog.show();
+        Retrofit retrofit = GitHubApplication.getRetrofitObject();
 
         // Simple REST adapter which points the GitHub API endpoint.
         GithubClient client = retrofit.create(GithubClient.class);
@@ -133,15 +103,16 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<GithubUsersResponse>() {
             @Override
             public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
-                List<GithubUsers> gitUsers = response.body().getItems();
-                recyclerView.setAdapter(new GithubUsersAdapter(getApplicationContext(), gitUsers));
+                usersList.addAll(response.body().getItems());
+                adapter.notifyDataSetChanged();
+
                 recyclerView.smoothScrollToPosition(0);
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
                 progessDialog.dismiss();
 
-                Log.d(LOG_TAG, "Number of users received: " + gitUsers.size());
+                Log.d(LOG_TAG, "Number of users received: " + usersList.size());
             }
 
             @Override
@@ -162,12 +133,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                builder.setPositiveButton("Retry", new DialogInterface.OnClickListener(){
+                builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        loadJSON();
+                        fetchGithubUsers();
                     }
                 });
                 AlertDialog dialog = builder.create(); // calling builder.create after adding buttons
@@ -178,49 +148,27 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }catch(Exception e){
-        Log.d("Error", e.getMessage());
-        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+
     }
 
-}
-
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        // save RecyclerView state
-//        mBundleRecyclerViewState = new Bundle();
-//        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
-//        mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
-//    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        mBundleRecyclerViewState = new Bundle();
-        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
-        mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
+        outState.putParcelableArrayList(KEY_RECYCLER_STATE, (ArrayList<? extends Parcelable>) usersList);
         super.onSaveInstanceState(outState);
     }
 
-    public void restorePreviousState(){
+    public void restorePreviousState(Bundle savedInstanceState) {
         // restore RecyclerView state
-        if (mBundleRecyclerViewState != null){
-            Parcelable listState = mBundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
-            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
+        if (savedInstanceState != null) {
+
+            ArrayList<GithubUsers> resultArrayList = savedInstanceState.getParcelableArrayList(KEY_RECYCLER_STATE);
+            if (resultArrayList != null) {
+                usersList.addAll(resultArrayList);
+                adapter.notifyDataSetChanged();
+            }
         }
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        // restore RecyclerView state
-//        if (mBundleRecyclerViewState != null){
-//            Parcelable listState = mBundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
-//            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
