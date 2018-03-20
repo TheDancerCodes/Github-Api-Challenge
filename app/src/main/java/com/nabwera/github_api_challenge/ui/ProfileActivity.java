@@ -2,7 +2,6 @@ package com.nabwera.github_api_challenge.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.nabwera.github_api_challenge.R;
-import com.nabwera.github_api_challenge.api.model.GithubUsers;
+import com.nabwera.github_api_challenge.model.GithubUsers;
 import com.nabwera.github_api_challenge.util.ShareUtil;
 
 /**

@@ -19,9 +19,9 @@ import android.widget.Toast;
 
 import com.nabwera.github_api_challenge.GitHubApplication;
 import com.nabwera.github_api_challenge.R;
-import com.nabwera.github_api_challenge.api.model.GithubUsers;
-import com.nabwera.github_api_challenge.api.model.GithubUsersResponse;
-import com.nabwera.github_api_challenge.api.service.GithubClient;
+import com.nabwera.github_api_challenge.model.GithubUsers;
+import com.nabwera.github_api_challenge.model.GithubUsersResponse;
+import com.nabwera.github_api_challenge.service.GithubClient;
 import com.nabwera.github_api_challenge.ui.adapter.GithubUsersAdapter;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.nabwera.github_api_challenge.api.model;
+package com.nabwera.github_api_challenge.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

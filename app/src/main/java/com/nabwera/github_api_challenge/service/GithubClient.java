@@ -1,6 +1,6 @@
-package com.nabwera.github_api_challenge.api.service;
+package com.nabwera.github_api_challenge.service;
 
-import com.nabwera.github_api_challenge.api.model.GithubUsersResponse;
+import com.nabwera.github_api_challenge.model.GithubUsersResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

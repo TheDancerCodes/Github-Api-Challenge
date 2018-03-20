@@ -1,4 +1,4 @@
-package com.nabwera.github_api_challenge.api.model;
+package com.nabwera.github_api_challenge.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
