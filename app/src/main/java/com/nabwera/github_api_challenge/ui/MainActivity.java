@@ -21,7 +21,7 @@ import com.nabwera.github_api_challenge.GitHubApplication;
 import com.nabwera.github_api_challenge.R;
 import com.nabwera.github_api_challenge.model.GithubUsers;
 import com.nabwera.github_api_challenge.model.GithubUsersResponse;
-import com.nabwera.github_api_challenge.service.GithubClient;
+import com.nabwera.github_api_challenge.service.GithubAPI;
 import com.nabwera.github_api_challenge.ui.adapter.GithubUsersAdapter;
 
 import java.util.ArrayList;
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         Retrofit retrofit = GitHubApplication.getRetrofitObject();
 
         // Simple REST adapter which points the GitHub API endpoint.
-        GithubClient client = retrofit.create(GithubClient.class);
+        GithubAPI client = retrofit.create(GithubAPI.class);
 
         Call<GithubUsersResponse> call = client.listOfJavaDevs("language:java location:lagos");
         call.enqueue(new Callback<GithubUsersResponse>() {
