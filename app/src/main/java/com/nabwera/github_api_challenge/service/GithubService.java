@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GithubService {
 
-    private Retrofit retrofit = null;
+    private static Retrofit retrofit = null;
 
 
     /**
@@ -17,7 +17,7 @@ public class GithubService {
      *
      * @return - The API interface
      */
-    public GithubAPI getAPI() {
+    public static GithubAPI getAPI() {
         String BASE_URL = "https://api.github.com/search/";
 
         if (retrofit == null) {

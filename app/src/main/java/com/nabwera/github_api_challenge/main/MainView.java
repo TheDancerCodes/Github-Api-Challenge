@@ -2,6 +2,7 @@ package com.nabwera.github_api_challenge.main;
 
 import com.nabwera.github_api_challenge.base.BaseView;
 import com.nabwera.github_api_challenge.model.GithubUsers;
+import com.nabwera.github_api_challenge.model.GithubUsersResponse;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface MainView extends BaseView {
      *
      * @param githubUsersList : show list of users
      */
-    void showUsers(List<GithubUsers> githubUsersList);
+    void showUsers(List<GithubUsersResponse> githubUsersList);
 
     /**
      * show network error
