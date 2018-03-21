@@ -202,6 +202,13 @@ public class MainActivity extends AppCompatActivity{
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
 
+        // Setting up the Orientation
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else {
+            mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        }
+
         if (savedInstanceState != null && savedInstanceState.containsKey(KEY_RECYCLER_STATE)) {
             restorePreviousState(savedInstanceState); // Restore data found in the Bundle
         } else {
