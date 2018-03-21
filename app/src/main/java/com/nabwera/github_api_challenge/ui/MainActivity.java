@@ -1,38 +1,19 @@
 package com.nabwera.github_api_challenge.ui;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Menu;
-import android.widget.Toast;
 
-import com.nabwera.github_api_challenge.GitHubApplication;
 import com.nabwera.github_api_challenge.R;
 import com.nabwera.github_api_challenge.model.GithubUsers;
-import com.nabwera.github_api_challenge.model.GithubUsersResponse;
 import com.nabwera.github_api_challenge.presenter.GithubPresenter;
-import com.nabwera.github_api_challenge.service.GithubAPI;
-import com.nabwera.github_api_challenge.ui.adapter.GithubUsersAdapter;
+import com.nabwera.github_api_challenge.adapter.GithubUsersAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 //public class MainActivity extends AppCompatActivity {
 //
@@ -242,7 +223,7 @@ public class MainActivity extends AppCompatActivity{
 
 
     public void displayRecycleView(List<GithubUsers> users){
-        RecyclerView.Adapter adapter = new GithubUsersAdapter(this, users);
+        RecyclerView.Adapter adapter = new GithubUsersAdapter(users);
         mRecyclerView.setAdapter(adapter);
     }
 }

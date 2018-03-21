@@ -1,14 +1,12 @@
 package com.nabwera.github_api_challenge.presenter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.nabwera.github_api_challenge.model.GithubUsers;
 import com.nabwera.github_api_challenge.model.GithubUsersResponse;
 import com.nabwera.github_api_challenge.service.GithubService;
 import com.nabwera.github_api_challenge.ui.MainActivity;
-import com.nabwera.github_api_challenge.ui.adapter.GithubUsersAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

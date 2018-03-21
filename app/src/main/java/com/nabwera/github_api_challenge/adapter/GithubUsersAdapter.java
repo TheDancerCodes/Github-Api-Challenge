@@ -1,4 +1,4 @@
-package com.nabwera.github_api_challenge.ui.adapter;
+package com.nabwera.github_api_challenge.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,33 +24,42 @@ import java.util.List;
 
 public class GithubUsersAdapter extends RecyclerView.Adapter<GithubUsersAdapter.MyViewHolder> {
 
-    private Context mContext;
+    private Context context;
+
     private List<GithubUsers> gitUsersList;
 
-    public GithubUsersAdapter(Context mContext, List<GithubUsers> gitUsers){
-        this.mContext = mContext;
+    public GithubUsersAdapter(List<GithubUsers> gitUsers){
         this.gitUsersList = gitUsers;
     }
 
     // Setting bind data to views
     @Override
-    public GithubUsersAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext())
+    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        context = viewGroup.getContext();
+        View view = LayoutInflater.from(context)
                 .inflate(R.layout.git_user_card, viewGroup, false);
 
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final GithubUsersAdapter.MyViewHolder viewHolder, int position) {
-        viewHolder.username.setText(gitUsersList.get(position).getLogin());
-        viewHolder.profileURL.setText(gitUsersList.get(position).getAvatarUrl());
+    public void onBindViewHolder(final MyViewHolder viewHolder, int position) {
 
-        // Using Glide to load the Profile Photo
-        Glide.with(mContext)
-                .load(gitUsersList.get(position).getAvatarUrl())
-                .placeholder(R.drawable.load)
-                .into(viewHolder.profile_photo);
+        int pos = viewHolder.getAdapterPosition();
+
+        GithubUsers githubUsers = gitUsersList.get(pos);
+
+        if (githubUsers != null) {
+
+            viewHolder.username.setText(gitUsersList.get(position).getLogin());
+            viewHolder.profileURL.setText(gitUsersList.get(position).getAvatarUrl());
+
+            // Using Glide to load the Profile Photo
+            Glide.with(context)
+                    .load(gitUsersList.get(position).getAvatarUrl())
+                    .placeholder(R.drawable.load)
+                    .into(viewHolder.profile_photo);
+        }
     }
 
     @Override
@@ -76,14 +85,14 @@ public class GithubUsersAdapter extends RecyclerView.Adapter<GithubUsersAdapter.
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION){
                         GithubUsers clickedDataItem = gitUsersList.get(pos);
-                        Intent intent = new Intent(mContext, ProfileActivity.class);
+                        Intent intent = new Intent(context, ProfileActivity.class);
                         intent.putExtra("username", gitUsersList.get(pos).getLogin());
                         intent.putExtra("profile_photo", gitUsersList.get(pos).getAvatarUrl());
                         intent.putExtra("profileURL", gitUsersList.get(pos).getUrl());
                         intent.putExtra("id", gitUsersList.get(pos).getId());
                         intent.putExtra("user", clickedDataItem);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
+                        context.startActivity(intent);
                         Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getLogin(), Toast.LENGTH_SHORT).show();
                     }
                 }
