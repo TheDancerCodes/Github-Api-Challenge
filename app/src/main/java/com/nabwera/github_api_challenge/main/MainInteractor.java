@@ -2,6 +2,7 @@ package com.nabwera.github_api_challenge.main;
 
 import com.nabwera.github_api_challenge.base.BasePresenter;
 import com.nabwera.github_api_challenge.model.GithubUsers;
+import com.nabwera.github_api_challenge.model.GithubUsersResponse;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface MainInteractor {
          *
          * @param githubUsersList : list of users
          */
-        void onSuccess(List<GithubUsers> githubUsersList);
+        void onSuccess(List<GithubUsersResponse> githubUsersList);
 
 
         /**
