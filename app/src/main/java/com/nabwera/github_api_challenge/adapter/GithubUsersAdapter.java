@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.nabwera.github_api_challenge.R;
 import com.nabwera.github_api_challenge.model.GithubUsers;
-import com.nabwera.github_api_challenge.ui.ProfileActivity;
+import com.nabwera.github_api_challenge.main.ProfileActivity;
 
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.nabwera.github_api_challenge.ui;
+package com.nabwera.github_api_challenge.main;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.nabwera.github_api_challenge.model.GithubUsers;
 import com.nabwera.github_api_challenge.model.GithubUsersResponse;
 import com.nabwera.github_api_challenge.service.GithubService;
-import com.nabwera.github_api_challenge.ui.MainActivity;
+import com.nabwera.github_api_challenge.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
