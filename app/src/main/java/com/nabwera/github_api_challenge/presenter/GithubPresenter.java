@@ -10,6 +10,7 @@ import com.nabwera.github_api_challenge.service.GithubService;
 import com.nabwera.github_api_challenge.ui.MainActivity;
 import com.nabwera.github_api_challenge.ui.adapter.GithubUsersAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,7 +34,7 @@ public class GithubPresenter {
         }
     }
 
-    public void getUser(final MainActivity mainActivity) {
+    public void getGithubUsers(final MainActivity mainActivity) {
         githubService
                 .getAPI()
                 .listOfJavaDevs()
@@ -47,7 +48,7 @@ public class GithubPresenter {
                         if (gitUsersList != null) {
 //                            RecyclerView.Adapter adapter = new GithubUsersAdapter(gitUsersList, mContext);
 //                            recyclerView.setAdapter(adapter);
-                            mainActivity.onGithubResultsSuccesful(gitUsersList);
+                            mainActivity.onGithubResultsSuccessful((ArrayList<GithubUsers>) gitUsersList);
                         }
 
                     }
