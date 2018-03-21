@@ -13,6 +13,9 @@ import retrofit2.http.Query;
 // Interface containing the Endpoint to query the API.
 public interface GithubAPI {
 
-    @GET("users")
-    Call<GithubUsersResponse> listOfJavaDevs(@Query("q") String devs_params);
+//    @GET("users")
+//    Call<GithubUsersResponse> listOfJavaDevs(@Query("q") String devs_params);
+
+    @GET("users?q=language:java+location:lagos&per_page=10&sort=followers\"")
+    Call<GithubUsersResponse> listOfJavaDevs();
 }
