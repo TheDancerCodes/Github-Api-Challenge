@@ -2,7 +2,6 @@ package com.nabwera.github_api_challenge.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -67,7 +66,6 @@ public class ProfileActivity extends AppCompatActivity {
             // Setting up data [Strings] to appropriate views.
             Glide.with(this)
                     .load(profilePic)
-                    .placeholder(R.drawable.load)
                     .into(imageView);
 
             userName.setText(profileName);

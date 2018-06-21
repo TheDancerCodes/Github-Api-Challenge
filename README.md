@@ -31,8 +31,13 @@ Build an Android app to retrieve a list of Java Developers in Lagos using the Gi
   ### TODOs
   Here are the next things that I plan on working on:
   
-  * Implement Constraint Layout.
-  * [FIX] Saving and Restoring Activity State Correctly.
-  * Implement Pagination.
-  * Reference dependencies in root gradle file.
+  * [FIX] Saving and Restoring Activity State Correctly using [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel).
+  * [FEATURE] Implement Pagination using the [Paging Library](https://developer.android.com/topic/libraries/architecture/paging/).
+  * [FEATURE] Include more details about a user in the model and the layout files.
+  * Integrate DataBinding.
   * Write Tests.
+  
+  Here are the TODOs that have been completed so far:
+  
+  * Implement Constraint layout.
+  * Reference dependencies in root gradle file.
