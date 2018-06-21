@@ -5,4 +5,5 @@
     <string name="username">Username:</string>
     <string name="profile_url">Profile Url:</string>
     <string name="share">Share Profile</string>
+    <string name="profile_photo_description">Github user profile photo</string>
 </resources>

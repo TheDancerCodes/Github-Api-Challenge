@@ -1,0 +1,61 @@
+ext.deps = [:]
+
+def versions = [:]
+versions.support = "27.1.1"
+versions.room = "1.1.1"
+versions.constraint_layout = "1.1.2"
+versions.lifecycle = "1.1.1"
+versions.paging = "1.0.0"
+versions.navigation = "1.0.0-alpha02"
+versions.retrofit2 = "2.3.0"
+versions.glide = "4.7.1"
+versions.gradle_plugin = "3.1.3"
+versions.espresso = "2.2.2"
+versions.junit = "4.12"
+
+def deps = [:]
+
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.gradle_plugin"
+deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
+deps.paging = "android.arch.paging:runtime:$versions.paging"
+deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+
+def lifecycle =  [:]
+lifecycle.java8 = "android.arch.lifecycle:common-java8:$versions.lifecycle"
+lifecycle.extensions = "android.arch.lifecycle:extensions:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def support = [:]
+support.appcompat_v7 = "com.android.support:appcompat-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
+support.recyclerview_v7 = "com.android.support:recyclerview-v7:$versions.support"
+support.cardview_v7 = "com.android.support:cardview-v7:$versions.support"
+deps.support = support
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit2"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit2"
+deps.retrofit = retrofit
+
+def room = [:]
+room.runtime = "android.arch.persistence.room:runtime:$versions.room"
+room.compiler = "android.arch.persistence.room:compiler:$versions.room"
+deps.room = room
+
+def testing = [:]
+testing.espresso_core = "com.android.support.test.espresso:espresso-core:$versions.espresso"
+testing.junit = "junit:junit:$versions.junit"
+deps.testing = testing
+
+def navigation = [:]
+navigation.fragment = "android.arch.navigation:navigation-fragment:$versions.navigation"
+navigation.ui = "android.arch.navigation:navigation-ui:$versions.navigation"
+deps.navigation = navigation
+
+def build_versions = [:]
+build_versions.min_sdk = 19
+build_versions.target_sdk = 27
+build_versions.build_tools = "27.0.3"
+ext.build_versions = build_versions
+
+ext.deps = deps
